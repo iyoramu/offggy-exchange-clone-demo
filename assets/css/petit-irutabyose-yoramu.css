@@ -1,0 +1,54 @@
+
+
+        /* Slick Slider Styles Start */
+        /* Custom rectangular line-style dots */
+        .slick-dots {
+            bottom: 30px;
+            display: flex !important;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .slick-dots li {
+            margin: 0 4px;
+            width: 30px; /* Line width */
+            height: 3px; /* Line thickness */
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            list-style: none;
+            border-radius: 0; /* Remove any rounded corners */
+        }
+        
+        .slick-dots li button {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .slick-dots li.slick-active {
+            background: #ffffff;
+            width: 60px; /* Active line width */
+        }
+        
+        .slick-dots li:hover {
+            background: rgba(255,255,255,0.6);
+        }
+
+        /* Slick Slider Styles End */
+        
+        
+        .home_new {
+            padding: 20px;
+            color: white;
+        }
+
+        .home_new.bg-safe {
+            background: url('../images/safe-913452_1280.jpg') center/cover no-repeat;
+        }
+
+        .home_new.bg-investment {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/investment-5241253_1280.jpg') center/cover no-repeat;
+        }
