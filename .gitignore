@@ -28,6 +28,7 @@ Thumbs.db
 *.swp
 *.bak
 *.backup
+*.desktop.ini
 
 # PHP specific files
 google-api/
