@@ -28,7 +28,7 @@ Thumbs.db
 *.swp
 *.bak
 *.backup
-*.desktop.ini
+*desktop.ini
 
 # PHP specific files
 google-api/
@@ -38,5 +38,5 @@ composer.json
 CODE_OF_CONDUCT.md
 
 # HTML, CSS, JavaScript specific files
-*.min.js
-*.min.css
+# *.min.js
+# *.min.css
