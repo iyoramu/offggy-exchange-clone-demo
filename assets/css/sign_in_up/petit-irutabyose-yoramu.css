@@ -3,6 +3,13 @@
 .layout-page {
     padding-top: 0px !important;
 }
+
+.layout-wrapper{
+  background: url('../../images/card.jpeg') no-repeat center;
+  background-size: cover;
+  padding: 40px 0;
+}
+
 .content-wrapper {
     padding-bottom: 0px !important;
 }
