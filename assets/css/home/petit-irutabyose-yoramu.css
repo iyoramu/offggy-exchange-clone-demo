@@ -46,9 +46,9 @@
         }
 
         .home_new.bg-safe {
-            background: url('../images/safe-913452_1280.jpg') center/cover no-repeat;
+            background: url('../../images/safe-913452_1280.jpg') center/cover no-repeat;
         }
 
         .home_new.bg-investment {
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/investment-5241253_1280.jpg') center/cover no-repeat;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../../images/investment-5241253_1280.jpg') center/cover no-repeat;
         }

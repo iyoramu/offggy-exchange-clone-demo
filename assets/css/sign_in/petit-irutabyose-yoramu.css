@@ -1,0 +1,42 @@
+
+.layout-menu-fixed .layout-navbar-full .layout-menu,
+.layout-page {
+    padding-top: 0px !important;
+}
+.content-wrapper {
+    padding-bottom: 0px !important;
+}
+
+/* Mobile menu styles */
+.mobile-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #0d0b2e;
+    z-index: 1000;
+}
+
+.mobile-menu.show {
+    display: block;
+}
+
+.mobile-menu-item {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.mobile-menu-item:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Toggle button styles */
+.toggle-icon {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+}
