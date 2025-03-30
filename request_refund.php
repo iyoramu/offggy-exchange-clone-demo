@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: sign_out?signout");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-template="vertical-menu-template-free">
 <head>
@@ -140,9 +147,9 @@
 <div class="content-wrapper">
     
 
-    <form class="contact-form" action="https://offggy.com/defr.php?username=petit" method="post" enctype="multipart/form-data">
-          <input type="text" class="contact-form-text" id="fullname" name="fullname" placeholder="Full Name" value="petit" required="">
-            <input type="email" class="contact-form-text" id="email" name="email" placeholder="Email address" value="petitirutabyoseyoramu@gmail.com" required="">     
+    <form class="contact-form" method="post" enctype="multipart/form-data">
+          <input type="text" class="contact-form-text" id="fullname" name="fullname" placeholder="Full Name" value="<?php echo $_SESSION['user']['u_username']; ?>" required="">
+            <input type="email" class="contact-form-text" id="email" name="email" placeholder="Email address" value="<?php echo $_SESSION['user']['u_email']; ?>" required="">     
             <input type="text" class="contact-form-text" id="btcId" name="btcId" placeholder="Your BTC or USDT address" required="">
  
         <p class="contact-form-text" style="color: #757574; background-color: #37356B;"> upload payment screenshot: <input type="file" name="file" id="file" required=""></p>
