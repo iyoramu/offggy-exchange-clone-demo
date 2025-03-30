@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['user'])) {
-    header("Location: sign_out?signout");
+    echo '<script>location.href="./"</script>';
     exit();
 }
 ?>
