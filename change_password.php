@@ -61,21 +61,123 @@
                                 <div>
                                     <div class="card card-bg p-5 m-2 bg-main">
                                         <h2>Change Password </h2>
-                                        <form method="post" action="https://offggy.com/pee.php">
-                                            <input type="hidden" name="csrfmiddlewaretoken" value="tD4ZxHTKK9pBsZNdHMRkljAo1KcsYPZZbi1eRjsWbh9HL9P0khyaXa6OpONAmSiM">
-                                            
-                                            <div id="div_id_email" class="mb-3">
-                                                <label for="email" class="form-label requiredField">
-                                                    E-mail<span class="asteriskField">*</span>
-                                                </label>
-                                                <input type="email" 
-                                                       id="email" 
-                                                       name="email" 
-                                                       placeholder="E-mail address" 
-                                                       autocomplete="email" 
-                                                       class="textinput form-control" 
-                                                       required>
-                                            </div>
+
+<?php
+require 'petit_irutabyose_yoramu/db.php'; // Database connection
+
+// Check if the reset code is provided in the URL
+if (isset($_GET['code'])) {
+    $resetCode = $_GET['code'];
+
+    // Fetch the reset code and expiration time from the database
+    $stmt = $pdo->prepare("SELECT * FROM password_resets WHERE reset_code = ?");
+    $stmt->execute([$resetCode]);
+    $resetRequest = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($resetRequest) {
+        $expirationTime = $resetRequest['expiration_time'];
+        $currentTime = date('Y-m-d H:i:s');
+
+        // Check if the reset code has expired
+        if (strtotime($currentTime) > strtotime($expirationTime)) {echo "
+            <!DOCTYPE html>
+            <html lang='en'>
+            <head>
+                <meta charset='UTF-8'>
+                <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                <title>Password Reset</title>
+                <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+            </head>
+            <body>
+                <script>
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Expired Reset Link',
+                        text: 'Your reset link has expired. Please request a new one.',
+                        confirmButtonText: 'Request Again',
+                    allowOutsideClick: false // Disables click outside to close the modal
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location = 'forgot_password'; // Redirect user to request a new reset code
+                        }
+                    });
+                </script>
+            </body>
+            </html>";
+            echo "Your reset link has expired. Please request a new one.";        
+        } else {
+            // Form submission to reset the password
+            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                $newPassword = $_POST['new_password'];
+                $confirmPassword = $_POST['confirm_password'];
+
+                // Validate the passwords
+                if ($newPassword === $confirmPassword) {
+                    // Hash the new password
+                    $hashedPassword = password_hash($newPassword, PASSWORD_BCRYPT);
+
+                    // Update the user's password in the database
+                    $stmt = $pdo->prepare("UPDATE users SET user_password = ? WHERE user_id = ?");
+                    $stmt->execute([$hashedPassword, $resetRequest['user_id']]);
+
+                    // Remove the reset code from the database to prevent reuse
+                    $stmt = $pdo->prepare("DELETE FROM password_resets WHERE reset_id = ?");
+                    $stmt->execute([$resetRequest['reset_id']]);echo "
+                    <!DOCTYPE html>
+                    <html lang='en'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <title>Password Reset</title>
+                        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    </head>
+                    <body>
+                        <script>
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Password Updated',
+                                text: 'Your password has been updated successfully. You can now log in with your new password.',
+                                confirmButtonText: 'Go to Login',
+                                allowOutsideClick: false // Disables click outside to close the modal
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location = 'sign_in'; // Redirect to login page
+                                }
+                            });
+                        </script>
+                    </body>
+                    </html>";
+                    echo "Your password has been updated successfully. You can now log in with your new password.";                    
+                } else {echo "
+                    <!DOCTYPE html>
+                    <html lang='en'>
+                    <head>
+                        <meta charset='UTF-8'>
+                        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+                        <title>Registration</title>
+                        <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+                    </head>
+                    <body>
+                        <script>
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Mismatch Detected',
+                                text: 'The passwords you entered do not match. Please try again.',
+                                confirmButtonText: 'Retry',
+                                allowOutsideClick: false // Disables click outside to close the modal
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.history.back(); // Go back to the previous page
+                                }
+                            });
+                        </script>
+                    </body>
+                    </html>";
+                    echo "The passwords you entered do not match. Please try again.";                    
+                }
+            }
+            ?>
+            <form method="post">
                                             
                                             <div id="div_id_password" class="mb-3">
                                                 <label for="id_password" class="form-label requiredField">
@@ -83,10 +185,11 @@
                                                 </label>
                                                 <input type="password" 
                                                        id="id_password" 
-                                                       name="password" 
+                                                       name="new_password" 
                                                        placeholder="New Password" 
                                                        autocomplete="new-password" 
-                                                       class="passwordinput form-control" 
+                                                       class="passwordinput form-control"
+                                                       maxlength="16"
                                                        required>
                                             </div>
                                             
@@ -96,10 +199,11 @@
                                                 </label>
                                                 <input type="password" 
                                                        id="id_password_confirm" 
-                                                       name="password_confirm" 
+                                                       name="confirm_password" 
                                                        placeholder="New Password (again)" 
                                                        autocomplete="new-password" 
-                                                       class="passwordinput form-control" 
+                                                       class="passwordinput form-control"
+                                                       maxlength="16"
                                                        required>
                                             </div>
                                             
@@ -115,6 +219,38 @@
                                             
                                             <div class="clearfix"></div>
                                         </form>
+            <?php
+        }
+    } else {echo "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Password Reset</title>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        </head>
+        <body>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Invalid Reset Link',
+                    text: 'The reset link you opened is invalid or has expired. Please check your email for the correct link or request a new password reset.',
+                    confirmButtonText: 'Try Again',
+                    allowOutsideClick: false // Disables click outside to close the modal
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = 'forgot_password'; // Redirect to request a new reset code
+                    }
+                });
+            </script>
+        </body>
+        </html>";
+        echo "The reset link you opened is invalid or has expired. Please check your email for the correct link or request a new password reset.";        
+    }
+}
+?>
+
                                     </div>
                                 </div>
                             </div>
