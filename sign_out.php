@@ -66,7 +66,16 @@
                                 <div>
                                     <div class="card card-bg p-5 m-2 bg-main">
                                         <p>Are you sure you want to log out?</p>
-                                        <a href="#" class="btn btn-md btn-primary text-white mt-3">Sign Out<a>
+                                        <a href="sign_out?signout" class="btn btn-md btn-primary text-white mt-3">Log Out<a>
+<?php
+if (isset($_GET['signout'])) {
+    session_start();
+    session_destroy();
+    header("Location: ./");
+    exit();
+}
+?>
+
                                         <br>
 
 
