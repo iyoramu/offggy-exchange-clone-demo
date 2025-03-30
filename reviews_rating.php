@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: sign_out?signout");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-template="vertical-menu-template-free">
 <head>
@@ -290,9 +297,9 @@
 
     <div class="review-form">
         <h2 style="color: #fff;">Submit Your Review</h2>
-        <form action="https://offggy.com/review.php?username=petit" method="POST" enctype="multipart/form-data">
+        <form method="POST" enctype="multipart/form-data">
         <div class="form-group">
-    <label for="author" style="color: #fff;">Your   username (e.g., petit)</label>
+    <label for="author" style="color: #fff;">Your   username (e.g., <?php echo $_SESSION['user']['u_username']; ?>)</label>
 
     <input type="text" id="author" name="author" placeholder="Enter your username" style=" font-size: 0.9rem;  
         width: 100%;
