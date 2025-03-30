@@ -134,7 +134,7 @@ if (!isset($_SESSION['user'])) {
                         <div class="row mx-auto">
                             <div class="col-12">
                                 <div class="h4 display-5 h4-display">
-                                    WELCOME, <?php echo $_SESSION['user']['username']; ?>
+                                    WELCOME, <?php echo $_SESSION['user']['u_username']; ?>
                                 </div>
                             </div>
                         </div>
