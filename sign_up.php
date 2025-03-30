@@ -1,4 +1,11 @@
 <?php
+session_start();
+// Redirect if already authenticated
+if (isset($_SESSION['user'])) {
+    header('Location: dashboard');
+    exit;
+}
+
 require 'petit_irutabyose_yoramu/petit_irutabyose_yoramu.php';
 
 $message = "";
