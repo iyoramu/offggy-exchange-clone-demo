@@ -1,3 +1,11 @@
+<?php
+session_start();
+// Redirect if already authenticated
+if (isset($_SESSION['user'])) {
+    header('Location: dashboard');
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
