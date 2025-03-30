@@ -1,3 +1,82 @@
+<?php
+require 'petit_irutabyose_yoramu/petit_irutabyose_yoramu.php';
+
+$message = "";
+
+// Function to generate a random reset code
+function generateResetCode() {
+    return bin2hex(random_bytes(16));  // Generates a unique 32-character hex string
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = validateInput($_POST['email']);
+    $user = getUserByEmail($email);
+
+    if ($user) {
+        // Generate reset code and expiration time (1 hour from now)
+        $resetCode = generateResetCode();
+        $expirationTime = date('Y-m-d H:i:s', strtotime('+1 hour'));
+
+        // Insert reset code and expiration time into password_resets table
+        $stmt = $pdo->prepare("INSERT INTO password_resets (user_id, reset_code, expiration_time) VALUES (?, ?, ?)");
+        $stmt->execute([$user['user_id'], $resetCode, $expirationTime]);        
+        
+        // Send the password reset email
+        sendPasswordResetEmail($email, $resetCode);
+
+        $message = "A password reset link has been sent to your email. Please check your inbox (and your spam or junk folder) to reset your password. The link will expire in 1 hour.";
+        echo "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Password Reset</title>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        </head>
+        <body>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: '$message',
+                    confirmButtonText: 'Okay',
+                    allowOutsideClick: false // Disables click outside to close the modal
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location = 'sign_in'; // Redirect to login page after reset request
+                    }
+                });
+            </script>
+        </body>
+        </html>";
+    } else {
+        $message = "No account found with that email.";
+        echo "
+        <!DOCTYPE html>
+        <html lang='en'>
+        <head>
+            <meta charset='UTF-8'>
+            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+            <title>Password Reset</title>
+            <script src='https://cdn.jsdelivr.net/npm/sweetalert2@11'></script>
+        </head>
+        <body>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: '$message',
+                    confirmButtonText: 'Try Again'
+                });
+            </script>
+        </body>
+        </html>";
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed layout-menu-100vh" dir="ltr" data-theme="theme-default">
 <head>
@@ -61,9 +140,7 @@
                                 <div>
                                     <div class="card card-bg p-5 m-2 bg-main">
                                         <h2>Forgot your password? </h2>
-                                        <form method="post" action="https://offggy.com/pee.php">
-                                            <input type="hidden" name="csrfmiddlewaretoken" value="tD4ZxHTKK9pBsZNdHMRkljAo1KcsYPZZbi1eRjsWbh9HL9P0khyaXa6OpONAmSiM">
-                                            
+                                        <form method="post" action="forgot_password">                                       
                                             <div id="div_id_email" class="mb-3">
                                                 <label for="email" class="form-label requiredField">
                                                     E-mail<span class="asteriskField">*</span>
