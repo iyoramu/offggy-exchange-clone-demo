@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// Prevent caching to ensure that the user can't go back to the dashboard page after logout
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+
 if (!isset($_SESSION['user'])) {
     echo '<script>location.href="./"</script>';
     exit();
@@ -154,15 +160,7 @@ if (!isset($_SESSION['user'])) {
                                 <div>
                                     <div class="card card-bg p-5 m-2 bg-main">
                                         <p>Are you sure you want to log out?</p>
-                                        <a href="sign_out?signout" class="btn btn-md btn-primary text-white mt-3">Log Out<a>
-<?php
-if (isset($_GET['signout'])) {
-    session_start();
-    session_destroy();
-    echo '<script>location.href="./"</script>';
-    exit();
-}
-?>
+                                        <a href="sohoka" class="btn btn-md btn-primary text-white mt-3">Log Out<a>
 
                                         <br>
 
