@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: sign_out?signout");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed" dir="ltr" data-theme="theme-default" data-template="vertical-menu-template-free">
 <head>
@@ -127,7 +134,7 @@
                         <div class="row mx-auto">
                             <div class="col-12">
                                 <div class="h4 display-5 h4-display">
-                                    WELCOME, petit
+                                    WELCOME, <?php echo $_SESSION['user']['username']; ?>
                                 </div>
                             </div>
                         </div>
