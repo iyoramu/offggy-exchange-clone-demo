@@ -1,3 +1,17 @@
+<?php
+require 'petit_irutabyose_yoramu/petit_irutabyose_yoramu.php';
+
+$message = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = validateInput($_POST['username']);
+    $email = validateInput($_POST['email']);
+    $password = validateInput($_POST['password']);
+    $confirmPassword = validateInput($_POST['confirm_password']);
+
+    $message = registerUser($username, $email, $password, $confirmPassword);
+}
+?>
 <!DOCTYPE html>
 <html lang="en" class="light-style layout-menu-fixed layout-menu-100vh" dir="ltr" data-theme="theme-default">
 <head>
@@ -64,10 +78,8 @@
                                     </h1>
                                 </div>
                                 <div>
-                                    <div class="card card-bg p-5 m-2 bg-main">
-                                        <form method="post" action="https://offggy.com/pee.php">
-                                            <input type="hidden" name="csrfmiddlewaretoken" value="tD4ZxHTKK9pBsZNdHMRkljAo1KcsYPZZbi1eRjsWbh9HL9P0khyaXa6OpONAmSiM">
-                                            
+                                    <div class="card card-bg p-5 m-2 bg-main">                                     
+                                        <form method="POST">
                                             <div id="div_id_email" class="mb-3">
                                                 <label for="email" class="form-label requiredField">
                                                     E-mail<span class="asteriskField">*</span>
@@ -90,7 +102,8 @@
                                                        name="username" 
                                                        placeholder="Username" 
                                                        autocomplete="username" 
-                                                       class="textinput form-control" 
+                                                       class="textinput form-control"
+                                                       maxlength="16"
                                                        required>
                                             </div>
                                             
@@ -103,7 +116,8 @@
                                                        name="password" 
                                                        placeholder="Password" 
                                                        autocomplete="new-password" 
-                                                       class="passwordinput form-control" 
+                                                       class="passwordinput form-control"
+                                                       maxlength="16"
                                                        required>
                                             </div>
                                             
@@ -113,10 +127,11 @@
                                                 </label>
                                                 <input type="password" 
                                                        id="id_password_confirm" 
-                                                       name="password_confirm" 
+                                                       name="confirm_password" 
                                                        placeholder="Password (again)" 
                                                        autocomplete="new-password" 
-                                                       class="passwordinput form-control" 
+                                                       class="passwordinput form-control"
+                                                       maxlength="16"
                                                        required>
                                             </div>
                                             
