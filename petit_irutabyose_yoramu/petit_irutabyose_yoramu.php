@@ -98,10 +98,12 @@ function registerUser($username, $email, $password, $confirmPassword) {
                     icon: 'success',
                     title: 'Registration Successful',
                     text: '$message',
-                    confirmButtonText: 'Okay'
+                    confirmButtonText: 'Okay',
+                    allowOutsideClick: false,
+                    allowEscapeKey: false
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        window.location = 'login'; // Redirect to login page after registration
+                        window.location = 'sign_in'; // Redirect to login page after registration
                     }
                 });
             </script>
