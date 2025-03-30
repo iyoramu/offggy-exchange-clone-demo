@@ -1,5 +1,11 @@
 <?php
 session_start();
+
+// Prevent caching to ensure that the user can't go back to the dashboard page after logout
+header("Cache-Control: no-cache, no-store, must-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
+
 if (!isset($_SESSION['user'])) {
     echo '<script>location.href="./"</script>';
     exit();
