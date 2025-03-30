@@ -55,7 +55,7 @@ if (!isset($_SESSION['user'])) {
                 <ul class="menu-inner py-1 pt-5 ps">
                     <li class="menu-item py-1">
                         <a href="#" class="menu-link">
-                            <div data-i18n="Basic">Logged in as petit</div>
+                            <div data-i18n="Basic">Logged in </div><?php echo $_SESSION['user']['u_username']; ?>
                         </a>
                     </li>
                     <li class="menu-item py-1">
@@ -154,7 +154,7 @@ if (!isset($_SESSION['user'])) {
     
 
     <form class="contact-form" method="post" enctype="multipart/form-data">
-          <input type="text" class="contact-form-text" id="fullname" name="fullname" placeholder="Full Name" value="<?php echo $_SESSION['user']['u_username']; ?>" required="">
+          <input type="text" class="contact-form-text" id="fullname" name="fullname" placeholder="Full Name" value="" required="">
             <input type="email" class="contact-form-text" id="email" name="email" placeholder="Email address" value="<?php echo $_SESSION['user']['u_email']; ?>" required="">     
             <input type="text" class="contact-form-text" id="btcId" name="btcId" placeholder="Your BTC or USDT address" required="">
  
