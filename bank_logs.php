@@ -54,7 +54,7 @@ if (!isset($_SESSION['user'])) {
                 <ul class="menu-inner py-1 pt-5 ps">
                     <li class="menu-item py-1">
                         <a href="#" class="menu-link">
-                            <div data-i18n="Basic">Logged in </div>
+                            <div data-i18n="Basic">Logged in </div><?php echo $_SESSION['user']['u_username']; ?>
                         </a>
                     </li>
                     <li class="menu-item py-1">
