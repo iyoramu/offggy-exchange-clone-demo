@@ -8,6 +8,12 @@
     margin: 50px 0;
   }
 
+  .layout-wrapper{
+    background: url('../../images/card.jpeg') no-repeat center;
+    background-size: cover;
+    padding: 40px 0;
+  }
+
   .custom-card {
     width: 25%;
     max-height: 100vh;
