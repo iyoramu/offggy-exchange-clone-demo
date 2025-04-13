@@ -76,6 +76,8 @@ docker-compose up -d
 - **Secure Architecture Consulting** (PCI-DSS, Crypto Compliance)  
 
 📬 **Contact:**  
-- **LinkedIn:** [linkedin.com/in/iyoramu]  
-- **Email:** yirutabyose@gmail.com  
+- **Phone:** 📞 [+250781014782](tel:+250781014782)
+- **LinkedIn:** 🔗 [linkedin.com/in/iyoramu](https://linkedin.com/in/iyoramu)
+- **Email:** ✉️ [yirutabyose@gmail.com](mailto:yirutabyose@gmail.com)
+- **Instagram:** 📷 [@iyoramu](https://www.instagram.com/iyoramu)
 - **PGP Key:** Available upon request.
