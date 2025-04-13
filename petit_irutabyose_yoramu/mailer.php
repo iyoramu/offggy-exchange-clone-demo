@@ -13,15 +13,15 @@ function sendEmail($to, $subject, $body) {
     try {
         // SMTP configuration
         $mail->isSMTP();
-        $mail->Host       = 'mail.ikigugugroup.rw'; // Use your SMTP server
+        $mail->Host       = 'mail.yirutabyose@gmail.com'; // Use your SMTP server
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'yoramu@ikigugugroup.rw'; // Your email address
-        $mail->Password   = 'ikigugu1359787533@?'; // Use an App Password for security
+        $mail->Username   = 'yirutabyose@gmail.com'; // Your email address
+        $mail->Password   = '1234567890'; // Use an App Password for security
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587; // Use 465 for SSL
 
         // Email details
-        $mail->setFrom('yoramu@ikigugugroup.rw', 'Offggy');
+        $mail->setFrom('yirutabyose@gmail.com', 'Offggy');
         $mail->addAddress($to);
         $mail->Subject = $subject;
         $mail->Body    = $body;
