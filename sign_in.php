@@ -1,3 +1,7 @@
+Enterprise-Grade Cryptocurrency Exchange Simulation  Copyright (C) 2025  IRUTABYOSE Yoramu  
+This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.  
+This is free software, and you are welcome to redistribute it  
+under certain conditions; type `show c' for details.
 <?php 
 session_start();
 require 'petit_irutabyose_yoramu/petit_irutabyose_yoramu.php';
